@@ -321,7 +321,10 @@ class CommonClient(svn.common_base.CommonBase):
 
                 commit_node = entry.find('commit')
 
-                author = commit_node.find('author').text
+                author = commit_node.find('author')
+                if author is not None:
+                    author = author.text
+
                 date = dateutil.parser.parse(commit_node.find('date').text)
 
                 commit_attr = commit_node.attrib
